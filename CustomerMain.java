@@ -11,16 +11,18 @@ import com.model.Customers;
 public class CustomerMain {
 
 	public void customer(Customers customer) throws ClassNotFoundException, SQLException, ParseException {
-		
-		CustomerDao cusDao = new CustomerDao();
-		Scanner scan=new Scanner(System.in);
-		System.out.println("1.Update Firstname\n" + "2.update Lastname\n" + "3.update username\n"
-				+ "4.update password\n" + "5.update email\n" + "6.update mobilenumber\n"
-				+ "7.update bank\n" + "8.update address\n" + "9.update pincode\n" + "10.update city\n"
-				+ "11.update image"
-				+ "12.product realted option");
-		int userOperation = Integer.parseInt(scan.nextLine());
 
+		// customer dao created for to access the methods
+		CustomerDao cusDao = new CustomerDao();
+		// scanner used for to get values
+		Scanner scan = new Scanner(System.in);
+		
+		// information purpose
+		System.out.println("1.Update Firstname\n" + "2.update Lastname\n" + "3.update username\n" + "4.update password\n"
+					     + "5.update email\n" + "6.update mobilenumber\n" + "7.update bank\n" + "8.update address\n"
+						 + "9.update pincode\n" + "10.update city\n" + "11.update image\n" + "12.Update bank and address"+"13.product realted option");
+		
+		int userOperation = Integer.parseInt(scan.nextLine());
 		switch (userOperation) {
 
 		// update first name
@@ -76,6 +78,7 @@ public class CustomerMain {
 			}
 			cusDao.updateUserName(customer.getCustomerId(), userName);
 			break;
+		
 		// update password
 		case 4:
 			String passWord;
@@ -127,6 +130,7 @@ public class CustomerMain {
 			}
 			cusDao.updateNumber(customer.getCustomerId(), Long.parseLong(mobileNumber));
 			break;
+		
 		// update bank
 		case 7:
 			String bank;
@@ -145,6 +149,7 @@ public class CustomerMain {
 			}
 			cusDao.updateBank(customer.getCustomerId(), Long.parseLong(bank));
 			break;
+		
 		// update address
 		case 8:
 			String address;
@@ -157,6 +162,7 @@ public class CustomerMain {
 			}
 			cusDao.updateAddress(customer.getCustomerId(), address);
 			break;
+		
 		// update pincode
 		case 9:
 			String pincode;
@@ -171,6 +177,7 @@ public class CustomerMain {
 			}
 			cusDao.updatePincode(customer.getCustomerId(), Integer.parseInt(pincode));
 			break;
+		
 		// update city
 		case 10:
 			String city;
@@ -188,6 +195,7 @@ public class CustomerMain {
 			}
 			cusDao.updateCity(customer.getCustomerId(), city);
 			break;
+
 		// update image
 		case 11:
 			String image;
@@ -196,11 +204,30 @@ public class CustomerMain {
 			cusDao.updateImage(customer.getCustomerId(), image);
 			break;
 			
+		// to update bank and address and pin code 	
 		case 12:
-			PetMain petmain=new PetMain();
+			System.out.println("enter the bank account number");
+			long bankAccount = Long.parseLong(scan.nextLine());
+			System.out.println("enter the address");
+			 address = scan.nextLine();
+			System.out.println("enter the city");
+			 city = scan.nextLine();
+			System.out.println("enter the pincode");
+			int pincode1 = Integer.parseInt(scan.nextLine());
+			System.out.println("enter the customer_id");
+			int cusid = Integer.parseInt(scan.nextLine());
+			Customers cusupdate = new Customers(cusid, bankAccount, address, city, pincode1);
+			CustomerDao cusdaoup = new CustomerDao();
+			cusdaoup.update(cusupdate);
+			break;
+
+
+	  // to perform pet related operation
+		case 13:
+			PetMain petmain = new PetMain();
 			petmain.petDetils(customer);
 			break;
-	}
+		}
 
-}
+	}
 }

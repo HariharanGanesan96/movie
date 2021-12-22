@@ -58,7 +58,7 @@ public class OrderItemsDao {
 		ResultSet re = pstmt.executeQuery();
 		while (re.next()) {
 			orderItem=new OrderItems(re.getInt(1),re.getInt(2),re.getInt(3),re.getInt(4),re.getDouble(5),re.getDouble(6));
-		orderList.add(orderItem);
+		    orderList.add(orderItem);
 		}
      return orderList;
 	}

@@ -23,8 +23,9 @@ public class TestMain2 {
 
 		// Asking for operation
 		System.out.println("Enter the operation");
-		System.out.println("1.register\n" + "2.login validation\n" + "3.bank and address updataion\n"
-				+ "4.list of user\n" + "5.delete\n");
+		System.out.println("1.register\n" 
+		                  + "2.login validation\n" +
+				            "3.bank and address updataion\n");
 
 		int operation = Integer.parseInt(scan.nextLine());
 
@@ -182,61 +183,24 @@ public class TestMain2 {
 					Customers customer = new Customers();
 					customer = cusDao.customerDetails(username);
 					System.out.println(customer);
-					CustomerMain customermain=new CustomerMain();
+					CustomerMain customermain = new CustomerMain();
 					customermain.customer(customer);
 				}
-				
+
 				// admin user login
 				else {
 					System.out.println("welcome Admin: " + username);
-					
-					AdminDao adminDao=new AdminDao();
+
+					AdminDao adminDao = new AdminDao();
 					Admin admin = adminDao.show(username);
 					System.out.println(admin);
-					AdminMain adminmain=new AdminMain();
+					AdminMain adminmain = new AdminMain();
 					adminmain.adminMain(admin);
 				}
 			} else {
 				System.out.println("invalid user name or password");
 			}
 			break;
-
-		// update of bank,address and pin code
-		case 3:
-			System.out.println("enter the bank account number");
-			long bankAccount = Long.parseLong(scan.nextLine());
-			System.out.println("enter the address");
-			String address = scan.nextLine();
-			System.out.println("enter the city");
-			String city = scan.nextLine();
-			System.out.println("enter the pincode");
-			int pincode = Integer.parseInt(scan.nextLine());
-			System.out.println("enter the customer_id");
-			int cusid = Integer.parseInt(scan.nextLine());
-			Customers cusupdate = new Customers(cusid, bankAccount, address, city, pincode);
-			CustomerDao cusdaoup = new CustomerDao();
-			cusdaoup.update(cusupdate);
-			break;
-
-		// Show all user
-		case 4:
-			System.out.println("show the all customers");
-			List<Customers> customerList = new ArrayList<Customers>();
-			cusDao = new CustomerDao();
-			customerList = cusDao.showAll();
-			for (Customers i : customerList) {
-				System.out.println(i);
-			}
-			break;
-
-		// delete user
-		case 5:
-			cusDao = new CustomerDao();
-			System.out.println("Enter customer id need to delete");
-			int cusiddelet = Integer.parseInt(scan.nextLine());
-			cusDao.delete(cusiddelet);
-			break;
-
 		}
 
 	}

@@ -14,14 +14,23 @@ import com.model.PetDetails;
 public class AdminMain {
 	
 	public void adminMain(Admin admin) throws ClassNotFoundException, SQLException {
+		
+		
+		
 		Scanner scan=new Scanner(System.in);
-		System.out.println("1.list of all user\n2.List of all request\n");
+		System.out.println("1.list of all user and delete user\n"
+	                     + "2.List of all request\n"
+				         +"3.Logout");
+		
+		
+		
 		int adminOperation=Integer.parseInt(scan.nextLine());
 		CustomerDao cusDao=new CustomerDao();
 		switch(adminOperation) {
 		
 		// list of all user
 		case 1:
+			
 			List<Customers> cusList=new ArrayList<Customers>();
 			cusList=cusDao.showAll();
 			for(Customers i:cusList) {
@@ -30,6 +39,7 @@ public class AdminMain {
 			
 			System.out.println("Do you want delete customer yes/No");
 			String choice=scan.nextLine().toLowerCase();
+	
 			if(choice.equals("yes")) {
 				System.out.println("Enter the customer id need to delete");
 				int cusid=Integer.parseInt(scan.nextLine());
@@ -43,12 +53,11 @@ public class AdminMain {
 			if(deleteChoice.equals("yes")) {
 				System.out.println("Enter the youser id to delete");
 				
-			}
-	
-			
-			break;
+			}		
+			break;		
 			
 			
+		// update status	
 		case 2:
 			// 
 			PetDao animalDao=new PetDao();
@@ -69,6 +78,11 @@ public class AdminMain {
 			System.out.println("do you want continue y/n");
 			c=scan.nextLine().toLowerCase().charAt(0);
 			}while(c=='y');	
+		
+		// logout
+		case 3:
+			System.exit(0);
+			break;
 		}
 	}
 
